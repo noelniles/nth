@@ -1,22 +1,33 @@
 package numbers
+import (
+    //"strconv"
+)
 
-
-type number interface {
-    add() number
-    subtract() number
-    multiply() number
-    divide() number
-}
-
-// ZZ is an arbitrarily large integer.
 type ZZ struct {
-    sign uint8
     base uint64
-    coefficients []uint64
+    coefficients []uint32
+    sign uint8
 }
 
-// NewZZ creates a new arbitrarily large integer.
-func NewZZ() *ZZ {
-    n :=  new(ZZ)
-    return n
+func NewZZ(val string) *ZZ {
+    z := new(ZZ)
+    
+    z.coefficients = make([]uint32, len(val))
+
+    if val[0] == '-' {
+        z.sign = 1 
+        val = val[1:]
+    } else {
+        z.sign = 0
+    }
+
+    for pos, char := range val {
+        z.coefficients[pos] = uint32(char - '0')
+    }
+    return z
+}
+
+func (a *ZZ, b *ZZ) Add *ZZ {
+    carry := 0
+
 }
